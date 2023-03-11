@@ -1,0 +1,14 @@
+{
+    "diet" : {
+        "feedtype" : string,
+        "brand" : string,
+        "source" : string,
+        "price" : float(2),
+        "deliveryTime" : integer,
+        "benefits" : [
+            string,
+            string,
+            string
+        ]
+    }
+}
