@@ -7,7 +7,7 @@ const doc = {
   },
   //host: 'localhost:8080',
   // schemes: ['http']
-  host: "horsearounf.onrender.com",
+  host: "cse-341-adolin.onrender.com",
   schemes: ["https"],
 };
 
