@@ -7,6 +7,12 @@ const { tryCatch } = require("../utils/tryCatch")
 // GET/allstables/
 stablesRouter.get('/',
     tryCatch(
+        // #swagger.tags = ['Stables']
+        // #swagger.description = 'Displays an array of Stables document.'
+        /* #swagger.responses[200] = { 
+                  description: 'Returns all stables document in stables collection',
+                  schema: { $ref: "#/definitions/Stables" }
+             } */
         stablesController.getAll
     )
 )

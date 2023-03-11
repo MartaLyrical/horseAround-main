@@ -7,6 +7,12 @@
   },
   "host": "cse-341-adolin.onrender.com",
   "basePath": "/",
+  "tags": [
+    {
+      "name": "Stables",
+      "description": "endpoints for stables"
+    }
+  ],
   "schemes": [
     "https"
   ],
@@ -24,9 +30,19 @@
     },
     "/stables/": {
       "get": {
-        "description": "",
+        "tags": [
+          "Stables"
+        ],
+        "description": "Displays an array of Stables document.",
         "parameters": [],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Returns all stables document in stables collection",
+            "schema": {
+              "$ref": "#/definitions/Stables"
+            }
+          }
+        }
       }
     },
     "/stables/inventory": {
@@ -67,6 +83,36 @@
           }
         ],
         "responses": {}
+      }
+    }
+  },
+  "definitions": {
+    "Stables": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "example": "640cac644be6e1bbfa31a31c"
+          },
+          "name": {
+            "type": "string",
+            "example": "Haley's Horse Heaven"
+          },
+          "location": {
+            "type": "string",
+            "example": "Chantilly, VA"
+          },
+          "owner": {
+            "type": "string",
+            "example": "Haley Comet"
+          },
+          "numberOfHorses": {
+            "type": "number",
+            "example": 38
+          }
+        }
       }
     }
   }
