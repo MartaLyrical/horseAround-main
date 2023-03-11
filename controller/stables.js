@@ -14,7 +14,7 @@ const getInventory = async (req, res) => {
 // GET/allstables/
 const getAll = async (req, res) => {
   const allStables = await stablesSchema.find();
-  res.status(200).json("stables");
+  res.status(200).json(allStables);
 };
 
 module.exports = { getInventory, getAll };
