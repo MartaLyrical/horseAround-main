@@ -5,7 +5,7 @@
     "description": "Horses API",
     "version": "1.0.0"
   },
-  "host": "horsearounf.onrender.com",
+  "host": "cse-341-adolin.onrender.com",
   "basePath": "/",
   "schemes": [
     "https"
