@@ -1,0 +1,69 @@
+[
+    {
+        "breedName" : "Appaloosa",
+        "color" : "pied, white and chestnut or black",
+        "height" : "14 to 16 hands",
+        "weight" : 1000,
+        "type" : "light",
+        "origin" : "United States",
+        "features" : [
+            "Spotted coat",
+            "White scelera",
+            "Stripped hooves"
+        ]
+    },
+    {
+        "breedName" : "Mustang",
+        "color" : "any",
+        "height" : "14 to 15 hands",
+        "weight" : 900,
+        "type" : "Light",
+        "origin" : "United States",
+        "features" : [
+            "Small, compact stature",
+            "Strong bones",
+            "Varied coat coloring"
+        ]
+    },
+    {
+        "breedName" : "Shetland",
+        "color" : "pied, white and other",
+        "height" : "No taller than 11.2 hands",
+        "weight" : 500,
+        "type" : "pony",
+        "origin" : "Scotland",
+        "features" : [
+            "Highly intelligent",
+            "Small size",
+            "Thick coat",
+            "Sturdy build"
+        ]
+    },
+    {
+        "breedName" : "Arabian",
+        "color" : "Bay, black, chestnut, or gray",
+        "height" : "14 to 15 hands",
+        "weight" : 900,
+        "type" : "light",
+        "origin" : "Middle East, North Africa",
+        "features" : [
+            "Wedge shaped head",
+            "Fine bone structure",
+            "Arched neck",
+            "High-carried tail"
+        ]
+    },
+    {
+        "breedName" : "Clydesdale",
+        "color" : "usually bay with white blaze also black, chestnut, grey or Sabino",
+        "height" : "16 to 18 hands",
+        "weight" : 1800,
+        "type" : "heavy",
+        "origin" : "Scotland",
+        "features" : [
+            "Arched neck",
+            "High withers",
+            "Sloped shoulders"
+        ]
+    }
+]

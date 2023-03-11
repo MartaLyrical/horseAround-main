@@ -1,14 +1,76 @@
-{
-    "diet" : {
-        "feedtype" : string,
-        "brand" : string,
-        "source" : string,
-        "price" : float(2),
-        "deliveryTime" : integer,
-        "benefits" : [
-            string,
-            string,
-            string
-        ]
-    }
-}
+[
+  {
+    "feedtype": "pellets",
+    "brand": "Buckeye Nutrition",
+    "product": "Safe 'N Easy Complete",
+    "source": "chewey.com",
+    "price": 31.99,
+    "size": 44,
+    "deliveryTime": 5,
+    "benefits": [
+      "Complete horse feed that helps keep your aging hoofed friend going strong.",
+      "Formulated for horses or ponies that are no longer able to consume long-stemmed hay due to dental issues.",
+      "Easy-to-chew fiber blend features low starch and sugar to help support your companion's metabolism.",
+      "Fortified with Gro N Win technology for essential amino acids, vitamins and minerals.",
+      "Contains no corn or molasses for horses and ponies with carbohydrate sensitivities."
+    ]
+  },
+  {
+    "feedtype": "pellets",
+    "brand": "Hygain",
+    "product": "Zero Horse Feed",
+    "source": "Don Vigant Feed and Storage",
+    "price": 36.99,
+    "size": 44,
+    "deliveryTime": 1,
+    "benefits": [
+      "Low-starch, low-sugar feed for horses prone to laminitis, Cushing's or EMS.",
+      "High in soluble fiber.",
+      "Cereal grain-free.",
+      "Fortified with vitamins, minerals and biotin."
+    ]
+  },
+  {
+    "feedtype": "dry food",
+    "brand": "Cavalor",
+    "product": "Performix",
+    "source": "Don Vigant Feed and Storage",
+    "price": 46.99,
+    "size": 44,
+    "deliveryTime": 1,
+    "benefits": [
+      "Provides safe starch from highly digestible puffed cereal grains to fuel strong performance.",
+      "Made with easily absorbable vitamins, chelated minerals and essential amino acids for optimal health.",
+      "High levels of vitamin E and selenium help protect cells from damage and boost metabolic activity, muscle health and athletic performance."
+    ]
+  },
+  {
+    "feedtype": "mix",
+    "brand": "Daily Dose Equine",
+    "product": "Trail Mix",
+    "source": "Fred's Feed and Frenzy",
+    "price": 43.0,
+    "size": 40,
+    "deliveryTime": 3,
+    "benefits": [
+      "High-calorie 12% fat feed for horses in work or hard keepers.",
+      "Non-GMO.",
+      "Free of fillers, including wheat, soybean meal, corn and distiller's grains.",
+      "Flame-roasted oats and barley are more digestible."
+    ]
+  },
+  {
+    "feedtype": "textured",
+    "brand": "Hallaway Feeds",
+    "product": "FibrEnergy High Fat, Low Starch",
+    "source": "hallawayfeeds.com",
+    "price": 59.99,
+    "size": 50,
+    "deliveryTime": 5,
+    "benefits": [
+      "Help ease your horse's gastric issues with an easy-to-digest high fat and fiber diet.",
+      "Includes a blend of equine-specific yeasts and prebiotics to assist with fiber digestion.",
+      "Contains micronutrients including a buffered mineral complex to help aid digestion in your horse's stomach and hindgut while supporting his bone density."
+    ]
+  }
+]

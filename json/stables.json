@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Haley's Horse Heaven",
+    "location": "Chantilly, VA",
+    "owner": "Haley Comet",
+    "numberOfHorses": 38
+  },
+  {
+    "name": "Dom's Fast and Furious Stables",
+    "location": "Sparks, NV",
+    "owner": "Dominic Toretto",
+    "numberOfHorses": 14
+  },
+  {
+    "name": "Hermes Stables and Boarding",
+    "location": "Ogden, UT",
+    "owner": "Zeus Goodman",
+    "numberOfHorses": 8
+  },
+  {
+    "name": "Performance Equines",
+    "location": "Landover, MD",
+    "owner": "Cherise Centauri",
+    "numberOfHorses": 103
+  },
+  {
+    "name": "Natural Stables",
+    "location": "Sierra Pines, CA",
+    "owner": "Lola Granola",
+    "numberOfHorses": 8
+  }
+]

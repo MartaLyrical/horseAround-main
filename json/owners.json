@@ -1,0 +1,42 @@
+[
+    {
+        "firstName" : "Deliah",
+        "lastName" : "Dobbins",
+        "emailAddress" : "ddobbins@horselovers.org",
+        "phone" : "555-846-9952",
+        "mailingAddress" : "123 Elm Street, Goodwin, VA 55146",
+        "numberOfHorses" : 1
+    },
+    {
+        "firstName" : "Erich",
+        "lastName" : "Mueller",
+        "emailAddress" : "erichm1987@Pferdeliebhaber.co.de",
+        "phone" : "+49 30 901820",
+        "mailingAddress" : "8762 Pferde Strasse, Munich, Germany",
+        "numberOfHorses" : 19
+    },
+    {
+        "firstName" : "Georgie",
+        "lastName" : "Hubert",
+        "emailAddress" : "horselady67@crazyforhorses.com",
+        "phone" : "555-626-1121",
+        "mailingAddress" : "67 Dyna Road, Henderson, NV 89014",
+        "numberOfHorses" : 25
+    },
+    {
+        "firstName" : "Cherise",
+        "lastName" : "Gruber",
+        "emailAddress" : "cgruber@horselovers.org",
+        "phone" : "555-449-5647",
+        "mailingAddress" : "8971 Main Street, Provo, UT 84097",
+        "numberOfHorses" : 9
+    },
+    {
+        "firstName" : "Robert",
+        "lastName" : "Richards",
+        "emailAddress" : "drichards0901@horselovers.org",
+        "phone" : "555-312-9487",
+        "mailingAddress" : "3453 Mangrove Avenue, Saratoga, CA 95124",
+        "numberOfHorses" : 112
+    }
+]
