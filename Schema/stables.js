@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose")
 
 const stablesSchema = new mongoose.Schema({
   name: {
@@ -17,6 +17,6 @@ const stablesSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-});
+})
 
-module.exports = mongoose.model("stables", stablesSchema, "stables");
+module.exports = mongoose.model("stables", stablesSchema, "stables")
