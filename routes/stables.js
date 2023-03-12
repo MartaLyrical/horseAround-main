@@ -27,7 +27,7 @@ stablesRouter.get('/inventory',
 // POST/stables/order
 stablesRouter.post('/order',
     tryCatch(
-        stablesController.addOrder
+        stablesController.orderOne
     )
 )
 
