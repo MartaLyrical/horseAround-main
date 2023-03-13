@@ -38,6 +38,346 @@
     }
   ],
   "paths": {
+    "/breeds": {
+      "post": {
+        "tags": ["breeds"],
+        "summary": "Add a new breed",
+        "description": "Add a new breed",
+        "operationId": "addBreed",
+        "requestBody": {
+          "description": "Creates a new breed document",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/breeds"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/breeds"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/breeds"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "put": {
+        "tags": ["breeds"],
+        "summary": "for updating breed document",
+        "description": "Update an existing breed by Id",
+        "operationId": "updateBreed",
+        "requestBody": {
+          "description": "Update an existent breed",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/breedsWithId"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/breedsWithId"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/breedsWithId"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      },
+      "get": {
+        "tags": ["breeds"],
+        "summary": "Find all breeds",
+        "description": "Breed documents with comma separated strings",
+        "operationId": "getBreeds",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/breeds"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/breeds/findByStatus": {
+      "get": {
+        "tags": ["breeds"],
+        "summary": "Finds breeds by status",
+        "description": "May return multiple breeds docs separated by comma",
+        "operationId": "findBreedsByStatus",
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Multiple status values can be provided with comma separated strings",
+            "required": false,
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "default": "available",
+              "enum": ["available", "add more status"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/breedsWithId"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/breeds/findByTags": {
+      "get": {
+        "tags": ["breeds"],
+        "summary": "Finds breeds by tags",
+        "description": "Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.",
+        "operationId": "findBreedsByTags",
+        "parameters": [
+          {
+            "name": "tags",
+            "in": "query",
+            "description": "Tags to filter by",
+            "required": false,
+            "explode": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/breedsWithId"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid tag value"
+          }
+        }
+      }
+    },
+    "/breeds/{breedsId}": {
+      "get": {
+        "tags": ["breeds"],
+        "summary": "Find pet by ID",
+        "description": "Returns a single breed",
+        "operationId": "getBreedById",
+        "parameters": [
+          {
+            "name": "breedsId",
+            "in": "path",
+            "description": "ID of a breed to return",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/breedsWithId"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "post": {
+        "tags": ["breeds"],
+        "summary": "Updates a breed with form data",
+        "description": "",
+        "operationId": "updateBreedWithForm",
+        "parameters": [
+          {
+            "name": "breedsId",
+            "in": "path",
+            "description": "ID of breed that needs to be updated",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Name of breed that needs to be updated",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Status of breed that needs to be updated",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["breeds"],
+        "summary": "Deletes a breed",
+        "description": "delete a breed",
+        "operationId": "deleteBreed",
+        "parameters": [
+          {
+            "name": "api_key",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "breedsId",
+            "in": "path",
+            "description": "Breed id to delete",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Something went wrong"
+          }
+        }
+      }
+    },
+    "/breeds/{breedsId}/uploadImage": {
+      "post": {
+        "tags": ["breeds"],
+        "summary": "uploads an image",
+        "description": "",
+        "operationId": "uploadFile",
+        "parameters": [
+          {
+            "name": "breedsId",
+            "in": "path",
+            "description": "ID of breed to update",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "additionalMetadata",
+            "in": "query",
+            "description": "Additional Metadata",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/octet-stream": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/stables": {
       "get": {
         "tags": ["stables"],
