@@ -3,12 +3,9 @@ const stablesSchema = require("../Schema/stables");
 // GET/stables/inventory
 const getInventory = async (req, res) => {
   const stablesInventory = await stablesSchema.find();
+  const numberOfHorses = stablesInventory.reduce((total, stablesSchema) => total + stablesSchema.numberOfHorses, 0)
 
-  if (!stablesInventory) {
-    throw new Error("Something went wrong");
-  }
-
-  res.status(200).json(stablesInventory);
+  res.status(200).json(numberOfHorses);
 };
 
 // GET/allstables/
