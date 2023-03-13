@@ -1,100 +1,299 @@
 {
-  "swagger": "2.0",
+  "openapi": "3.0.3",
   "info": {
-    "title": "My API",
-    "description": "Horses API",
+    "title": "Horse Around - OpenAPI 3.0",
+    "description": "Horse Around - Adolin Group - CSE341",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "horseAround@horsy.com"
+    },
     "version": "1.0.0"
   },
-  "host": "cse-341-adolin.onrender.com",
-  "basePath": "/",
-  "tags": [
+  "servers": [
     {
-      "name": "Stables",
-      "description": "endpoints for stables"
+      "url": "https://horsearounddraft.onrender.com/",
+      "description": "Production server"
+    },
+    {
+      "url": "http://localhost:8080",
+      "description": "Staging server"
     }
   ],
-  "schemes": [
-    "https"
+  "tags": [
+    {
+      "name": "breeds",
+      "description": "Access to Horse Breeds"
+    },
+    {
+      "name": "stables",
+      "description": "Access to stables inventory and orders"
+    },
+    {
+      "name": "owners",
+      "description": "Access to owners"
+    },
+    {
+      "name": "diet",
+      "description": "Access to horse diets"
+    }
   ],
   "paths": {
-    "/": {
+    "/stables": {
       "get": {
-        "description": "",
-        "parameters": [],
+        "tags": ["stables"],
+        "summary": "Returns all stables",
+        "description": "Documents returned separated by comma",
+        "operationId": "getStables",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/stablesWithId"
+                }
+              }
+            }
           }
         }
       }
     },
-    "/stables/": {
+    "/stables/{stablesId}": {
       "get": {
-        "tags": [
-          "Stables"
+        "tags": ["stables"],
+        "summary": "Find a stable by id",
+        "description": "For valid response, input id must be in db",
+        "operationId": "getStablesById",
+        "parameters": [
+          {
+            "name": "stablesId",
+            "in": "path",
+            "description": "ID of stable that needs to be fetched",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "640f585d371f9553350ec0cf"
+            }
+          }
         ],
-        "description": "Displays an array of Stables document.",
-        "parameters": [],
         "responses": {
           "200": {
-            "description": "Returns all stables document in stables collection",
-            "schema": {
-              "$ref": "#/definitions/Stables"
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/stablesWithId"
+                }
+              }
             }
+          },
+          "500": {
+            "description": "Something went wrong"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["stables"],
+        "summary": "Delete a stable by ID",
+        "description": "For valid response, input id must be in db",
+        "operationId": "deleteStable",
+        "parameters": [
+          {
+            "name": "stablesId",
+            "in": "path",
+            "description": "ID of the stable that needs to be deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "500": {
+            "description": "Something went wrong"
           }
         }
       }
     },
     "/stables/inventory": {
       "get": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
+        "tags": ["stables"],
+        "summary": "Returns horses inventories by numberOfhorses",
+        "description": "Returns sum of numberOfHorses in all stables docs",
+        "operationId": "getInventory",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/stables/order": {
       "post": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
-      }
-    },
-    "/stables/{id}": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
+        "tags": ["stables"],
+        "summary": "Place an order for a horse",
+        "description": "Place a new order in the stables",
+        "operationId": "placeOrder",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/stablesOrder"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/stablesOrder"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/stablesOrder"
+              }
+            }
           }
-        ],
-        "responses": {}
-      },
-      "delete": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
+        },
+        "responses": {
+          "204": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/mongoDBId"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Something went wrong"
           }
-        ],
-        "responses": {}
+        }
       }
     }
   },
-  "definitions": {
-    "Stables": {
-      "type": "array",
-      "items": {
+  "components": {
+    "schemas": {
+      "breeds": {
+        "type": "object",
+        "properties": {
+          "breedName": {
+            "type": "string",
+            "example": "Appaloosa"
+          },
+          "color": {
+            "type": "string",
+            "example": "pied, white and chestnut or black"
+          },
+          "height": {
+            "type": "string",
+            "example": "14 to 16 hands"
+          },
+          "weight": {
+            "type": "integer",
+            "example": 1000
+          },
+          "type": {
+            "type": "string",
+            "example": "light"
+          },
+          "origin": {
+            "type": "string",
+            "example": "United States"
+          },
+          "features": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": ["Spotted coat", "White scelera", "Stripped hooves"]
+          }
+        },
+        "xml": {
+          "name": "breeds"
+        }
+      },
+      "breedsWithId": {
         "type": "object",
         "properties": {
           "_id": {
             "type": "string",
-            "example": "640cac644be6e1bbfa31a31c"
+            "description": "generated by mongodb",
+            "example": "640cd5d24be6e1bbfa31a32f"
+          },
+          "breedName": {
+            "type": "string",
+            "example": "Appaloosa"
+          },
+          "color": {
+            "type": "string",
+            "example": "pied, white and chestnut or black"
+          },
+          "height": {
+            "type": "string",
+            "example": "14 to 16 hands"
+          },
+          "weight": {
+            "type": "integer",
+            "example": 1000
+          },
+          "type": {
+            "type": "string",
+            "example": "light"
+          },
+          "origin": {
+            "type": "string",
+            "example": "United States"
+          },
+          "features": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": ["Spotted coat", "White scelera", "Stripped hooves"]
+          }
+        },
+        "xml": {
+          "name": "updateBreeds"
+        }
+      },
+      "stables": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Haley's Horse Heaven"
+          },
+          "location": {
+            "type": "string",
+            "example": "Chantilly, VA"
+          },
+          "owner": {
+            "type": "string",
+            "example": "Haley Comet"
+          },
+          "numberOfHorses": {
+            "type": "integer",
+            "example": 38
+          }
+        }
+      },
+      "stablesWithId": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "generated by mongodb",
+            "example": "640f585d371f9553350ec0cf"
           },
           "name": {
             "type": "string",
@@ -109,8 +308,55 @@
             "example": "Haley Comet"
           },
           "numberOfHorses": {
-            "type": "number",
+            "type": "integer",
             "example": 38
+          }
+        }
+      },
+      "stablesOrder": {
+        "type": "object",
+        "properties": {
+          "horseId": {
+            "type": "string",
+            "example": "640cac644be6e1bbfa31a31c"
+          },
+          "stablesId": {
+            "type": "string",
+            "example": "640cac644be6e1bbfa31a31c"
+          }
+        }
+      },
+      "mongoDBId": {
+        "type": "string",
+        "example": "640f585d371f9553350ec0cf"
+      },
+      "ApiResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "type": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "##default"
+        }
+      }
+    },
+    "requestBodies": {
+      "Horses": {
+        "description": "Horse object that needs to be added to the store",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/breeds"
+            }
           }
         }
       }
