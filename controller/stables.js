@@ -51,7 +51,7 @@ const orderOne = async (req, res) => {
 // DELETE/stables/{stablesId}
 const deleteOne = async (req, res) => {
 
-  const removedStables = await Schema.deleteOne({ _id: req.params.id })
+  const removedStables = await stablesSchema.deleteOne({ _id: req.params.id })
   res.status(200).json(removedStables)
 
 }
