@@ -1,4 +1,5 @@
 const stablesSchema = require("../Schema/stables");
+const stablesOrderSchema = require("../Schema/order");
 
 // GET/stables/inventory
 const getInventory = async (req, res) => {
@@ -28,9 +29,21 @@ const getOne = async (req, res) => {
 // POST/stables/order
 const orderOne = async (req, res) => {
 
-  const stablesOrder = await Schema.findOneAndUpdate({ _id: req.params.id }, { $set: req.body }, { new: true, runValidators: true })
+  const orderReq = new stablesOrderSchema({
+    horseId: req.body.horseId,
+    stablesId: req.body.horseId
+  })
 
-  res.status(204).json(stablesOrder)
+  console.log(orderReq.horseId)
+
+  const existingOrder = await stablesOrderSchema.findOne({ horseId: orderReq.horseId })
+
+  if (existingOrder) {
+    console.log("Order exist")
+    return res.status(400).json({ message: `Horse with ID ${orderReq.horseId} already exists` });
+  }
+  const newOrder = await orderReq.save()
+  res.status(201).json(newOrder._id)
 
 
 }
