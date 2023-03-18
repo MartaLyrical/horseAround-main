@@ -13,7 +13,8 @@ const getSingle = async (req, res) => {
     const diet = await dietSchema.findById(req.params.id);
 
     if (!diet) {
-        throw new Error('ID not found');
+        // throw new Error('ID not found');
+        res.status(500).json('ID not found. Try again.')
     }
 
     res.status(200).json(diet);
