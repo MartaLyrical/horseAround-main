@@ -1,3 +1,4 @@
+const breedsSchema = require("../Schema/breeds");
 const mongodb = require("../db/mongoClientDb");
 
 const getAll = async (req, res) => {
@@ -6,21 +7,34 @@ const getAll = async (req, res) => {
     res.status(200).json(lists);
   });
 };
+
+// const getOne = async (req, res) => {
+//   try {
+//     const breedId = new ObjectId(req.params.id);
+//     const result = await mongodb
+//       .getDb()
+//       .db()
+//       .collection("breeds")
+//       .findOne({ _id: breedId });
+//     result.toArray().then((lists) => {
+//       res.setHeader("Content-Type", "application/json");
+//       res.status(200).json(lists[0]);
+//     });
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// };
+
+// GET/breeds/{breedsId}
 const getOne = async (req, res) => {
-  try {
-    const breedId = new ObjectId(req.params.id);
-    const result = await mongodb
-      .getDb()
-      .db()
-      .collection("breeds")
-      .find({ _id: breedId });
-    result.toArray().then((lists) => {
-      res.setHeader("Content-Type", "application/json");
-      res.status(200).json(lists[0]);
-    });
-  } catch (err) {
-    res.status(500).json(err);
+  const breeds = await breedsSchema.findById(req.params.id);
+
+  if (!breeds) {
+    // throw new Error('ID not found');
+    res.status(500).json("ID not found. Try again.");
   }
+
+  res.status(200).json(breeds);
 };
 
 const createBreed = async (req, res) => {
