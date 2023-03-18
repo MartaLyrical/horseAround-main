@@ -2,7 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const dotenv = require("dotenv");
-const mongoose = require("./db/connect");
+const mongoose = require("./db/mongooseDb");
+const mongoClient = require("./db/mongoClientDb");
 const routes = require("./routes");
 const errorHandler = require("./middleware/errorHandler");
 const swaggerUi = require("swagger-ui-express");
@@ -34,7 +35,20 @@ mongoose.initDb((err) => {
   if (err) {
     console.log(err);
   } else {
-    app.listen(port);
-    console.log(`Connected to db and listening on port ${port}`);
+
+    console.log(`Connected to mongoose`);
   }
+});
+
+mongoClient.initDb((err) => {
+  if (err) {
+    console.log(err);
+  } else {
+
+    console.log(`Connected to mongoClient`);
+  }
+});
+
+app.listen(port, () => {
+  console.log(`App running on port ${port}`);
 });

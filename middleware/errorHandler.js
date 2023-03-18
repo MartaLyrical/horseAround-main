@@ -1,11 +1,6 @@
 const errorHandler = (error, req, res, next) => {
     console.log(error.name)
-
-    if (error.name === "CastError") {
-        return res.status(500).send("Check input data");
-    }
-
-    return res.status(500).send(error.message)
+    return res.status(500).send('Something went wrong')
 };
 
 module.exports = errorHandler
