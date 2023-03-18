@@ -5,23 +5,27 @@ const doc = {
     title: "My API",
     description: "Horses API",
   },
-  host: 'localhost:8080',
-  schemes: ['http'],
+  host: "localhost:8080",
+  schemes: ["http"],
   // host: "cse-341-adolin.onrender.com",
   // schemes: ["https"],
-  tags: [{
-    "name": "Stables",
-    "description": "endpoints for stables"
-  }],
+  tags: [
+    {
+      name: "Stables",
+      description: "endpoints for stables",
+    },
+  ],
   definitions: {
-    "Stables": [{
-      "_id": "640cac644be6e1bbfa31a31c",
-      "name": "Haley's Horse Heaven",
-      "location": "Chantilly, VA",
-      "owner": "Haley Comet",
-      "numberOfHorses": 38
-    }]
-  }
+    Stables: [
+      {
+        _id: "640cac644be6e1bbfa31a31c",
+        name: "Haley's Horse Heaven",
+        location: "Chantilly, VA",
+        owner: "Haley Comet",
+        numberOfHorses: 38,
+      },
+    ],
+  },
 };
 
 const outputFile = "./swagger.json";
