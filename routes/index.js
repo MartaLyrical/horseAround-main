@@ -11,5 +11,6 @@ router.get('/', (req, res) => {
 // routes goes here
 router.use('/stables', require('./stables'))
 router.use('/breeds', require('./breeds'))
+router.use('/diet', require('./diet'))
 
 module.exports = router

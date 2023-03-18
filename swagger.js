@@ -5,10 +5,10 @@ const doc = {
     title: "My API",
     description: "Horses API",
   },
-  //host: 'localhost:8080',
-  // schemes: ['http']
-  host: "cse-341-adolin.onrender.com",
-  schemes: ["https"],
+  host: 'localhost:8080',
+  schemes: ['http'],
+  // host: "cse-341-adolin.onrender.com",
+  // schemes: ["https"],
   tags: [{
     "name": "Stables",
     "description": "endpoints for stables"

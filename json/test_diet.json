@@ -1,0 +1,17 @@
+[
+    {
+      "feedtype": "TESTING",
+      "brand": "Testing Feed Brand",
+      "product": "Testing Company",
+      "source": "testing.com",
+      "price": 999.99,
+      "size": 99,
+      "deliveryTime": 99,
+      "benefits": [
+        "Benefit #1",
+        "Benefit #2",
+        "Benefit #3",
+        "Benefit #4"
+      ]
+    }
+]

@@ -1,639 +1,157 @@
 {
-  "openapi": "3.0.3",
+  "swagger": "2.0",
   "info": {
-    "title": "Horse Around - OpenAPI 3.0",
-    "description": "Horse Around - Adolin Group - CSE341",
-    "termsOfService": "http://swagger.io/terms/",
-    "contact": {
-      "email": "horseAround@horsy.com"
-    },
+    "title": "My API",
+    "description": "Horses API",
     "version": "1.0.0"
   },
-  "servers": [
-    {
-      "url": "https://horsearounddraft.onrender.com/",
-      "description": "Production server"
-    },
-    {
-      "url": "http://localhost:8080",
-      "description": "Staging server"
-    }
-  ],
+  "host": "localhost:8080",
+  "basePath": "/",
   "tags": [
     {
-      "name": "breeds",
-      "description": "Access to Horse Breeds"
-    },
-    {
-      "name": "stables",
-      "description": "Access to stables inventory and orders"
-    },
-    {
-      "name": "owners",
-      "description": "Access to owners"
-    },
-    {
-      "name": "diet",
-      "description": "Access to horse diets"
+      "name": "Stables",
+      "description": "endpoints for stables"
     }
   ],
+  "schemes": [
+    "http"
+  ],
   "paths": {
-    "/breeds": {
-      "post": {
-        "tags": ["breeds"],
-        "summary": "Add a new breed",
-        "description": "Add a new breed",
-        "operationId": "addBreed",
-        "requestBody": {
-          "description": "Creates a new breed document",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/breeds"
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/breeds"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "201": {
-            "description": "Successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/breeds"
-                }
-              }
-            }
-          },
-          "405": {
-            "description": "Invalid input"
-          }
-        }
-      },
-      "put": {
-        "tags": ["breeds"],
-        "summary": "for updating breed document",
-        "description": "Update an existing breed by Id",
-        "operationId": "updateBreed",
-        "requestBody": {
-          "description": "Update an existent breed",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/breedsWithId"
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/breedsWithId"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/breedsWithId"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid ID supplied"
-          },
-          "404": {
-            "description": "Not found"
-          },
-          "405": {
-            "description": "Validation exception"
-          }
-        }
-      },
+    "/": {
       "get": {
-        "tags": ["breeds"],
-        "summary": "Find all breeds",
-        "description": "Breed documents with comma separated strings",
-        "operationId": "getBreeds",
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/breeds"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found"
-          }
-        }
-      }
-    },
-    "/breeds/findByStatus": {
-      "get": {
-        "tags": ["breeds"],
-        "summary": "Finds breeds by status",
-        "description": "May return multiple breeds docs separated by comma",
-        "operationId": "findBreedsByStatus",
-        "parameters": [
-          {
-            "name": "status",
-            "in": "query",
-            "description": "Multiple status values can be provided with comma separated strings",
-            "required": false,
-            "explode": true,
-            "schema": {
-              "type": "string",
-              "default": "available",
-              "enum": ["available", "add more status"]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/breedsWithId"
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found"
-          }
-        }
-      }
-    },
-    "/breeds/findByTags": {
-      "get": {
-        "tags": ["breeds"],
-        "summary": "Finds breeds by tags",
-        "description": "Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.",
-        "operationId": "findBreedsByTags",
-        "parameters": [
-          {
-            "name": "tags",
-            "in": "query",
-            "description": "Tags to filter by",
-            "required": false,
-            "explode": true,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/breedsWithId"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid tag value"
-          }
-        }
-      }
-    },
-    "/breeds/{breedsId}": {
-      "get": {
-        "tags": ["breeds"],
-        "summary": "Find pet by ID",
-        "description": "Returns a single breed",
-        "operationId": "getBreedById",
-        "parameters": [
-          {
-            "name": "breedsId",
-            "in": "path",
-            "description": "ID of a breed to return",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/breedsWithId"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid ID supplied"
-          },
-          "404": {
-            "description": "Not found"
-          }
-        }
-      },
-      "post": {
-        "tags": ["breeds"],
-        "summary": "Updates a breed with form data",
         "description": "",
-        "operationId": "updateBreedWithForm",
-        "parameters": [
-          {
-            "name": "breedsId",
-            "in": "path",
-            "description": "ID of breed that needs to be updated",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "name",
-            "in": "query",
-            "description": "Name of breed that needs to be updated",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "status",
-            "in": "query",
-            "description": "Status of breed that needs to be updated",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "405": {
-            "description": "Invalid input"
-          }
-        }
-      },
-      "delete": {
-        "tags": ["breeds"],
-        "summary": "Deletes a breed",
-        "description": "delete a breed",
-        "operationId": "deleteBreed",
-        "parameters": [
-          {
-            "name": "api_key",
-            "in": "header",
-            "description": "",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "breedsId",
-            "in": "path",
-            "description": "Breed id to delete",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Something went wrong"
-          }
-        }
-      }
-    },
-    "/breeds/{breedsId}/uploadImage": {
-      "post": {
-        "tags": ["breeds"],
-        "summary": "uploads an image",
-        "description": "",
-        "operationId": "uploadFile",
-        "parameters": [
-          {
-            "name": "breedsId",
-            "in": "path",
-            "description": "ID of breed to update",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "additionalMetadata",
-            "in": "query",
-            "description": "Additional Metadata",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/octet-stream": {
-              "schema": {
-                "type": "string",
-                "format": "binary"
-              }
-            }
-          }
-        },
+        "parameters": [],
         "responses": {
           "200": {
-            "description": "successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiResponse"
-                }
-              }
-            }
+            "description": "OK"
           }
         }
       }
     },
-    "/stables": {
+    "/stables/": {
       "get": {
-        "tags": ["stables"],
-        "summary": "Returns all stables",
-        "description": "Documents returned separated by comma",
-        "operationId": "getStables",
+        "tags": [
+          "Stables"
+        ],
+        "description": "Displays an array of Stables document.",
+        "parameters": [],
         "responses": {
           "200": {
-            "description": "successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/stablesWithId"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/stables/{stablesId}": {
-      "get": {
-        "tags": ["stables"],
-        "summary": "Find a stable by id",
-        "description": "For valid response, input id must be in db",
-        "operationId": "getStablesById",
-        "parameters": [
-          {
-            "name": "stablesId",
-            "in": "path",
-            "description": "ID of stable that needs to be fetched",
-            "required": true,
+            "description": "Returns all stables document in stables collection",
             "schema": {
-              "type": "string",
-              "example": "640f585d371f9553350ec0cf"
+              "$ref": "#/definitions/Stables"
             }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/stablesWithId"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Something went wrong"
-          }
-        }
-      },
-      "delete": {
-        "tags": ["stables"],
-        "summary": "Delete a stable by ID",
-        "description": "For valid response, input id must be in db",
-        "operationId": "deleteStable",
-        "parameters": [
-          {
-            "name": "stablesId",
-            "in": "path",
-            "description": "ID of the stable that needs to be deleted",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Invalid ID supplied"
-          },
-          "500": {
-            "description": "Something went wrong"
           }
         }
       }
     },
     "/stables/inventory": {
       "get": {
-        "tags": ["stables"],
-        "summary": "Returns horses inventories by numberOfhorses",
-        "description": "Returns sum of numberOfHorses in all stables docs",
-        "operationId": "getInventory",
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "integer"
-                }
-              }
-            }
-          }
-        }
+        "description": "",
+        "parameters": [],
+        "responses": {}
       }
     },
     "/stables/order": {
       "post": {
-        "tags": ["stables"],
-        "summary": "Place an order for a horse",
-        "description": "Place a new order in the stables",
-        "operationId": "placeOrder",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/stablesOrder"
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/stablesOrder"
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/stablesOrder"
-              }
-            }
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/stables/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
-        },
-        "responses": {
-          "204": {
-            "description": "successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/mongoDBId"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Something went wrong"
+        ],
+        "responses": {}
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
-        }
+        ],
+        "responses": {}
+      }
+    },
+    "/breeds/": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/diet/": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      },
+      "post": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/diet/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
       }
     }
   },
-  "components": {
-    "schemas": {
-      "breeds": {
-        "type": "object",
-        "properties": {
-          "breedName": {
-            "type": "string",
-            "example": "Appaloosa"
-          },
-          "color": {
-            "type": "string",
-            "example": "pied, white and chestnut or black"
-          },
-          "height": {
-            "type": "string",
-            "example": "14 to 16 hands"
-          },
-          "weight": {
-            "type": "integer",
-            "example": 1000
-          },
-          "type": {
-            "type": "string",
-            "example": "light"
-          },
-          "origin": {
-            "type": "string",
-            "example": "United States"
-          },
-          "features": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "example": ["Spotted coat", "White scelera", "Stripped hooves"]
-          }
-        },
-        "xml": {
-          "name": "breeds"
-        }
-      },
-      "breedsWithId": {
+  "definitions": {
+    "Stables": {
+      "type": "array",
+      "items": {
         "type": "object",
         "properties": {
           "_id": {
             "type": "string",
-            "description": "generated by mongodb",
-            "example": "640cd5d24be6e1bbfa31a32f"
-          },
-          "breedName": {
-            "type": "string",
-            "example": "Appaloosa"
-          },
-          "color": {
-            "type": "string",
-            "example": "pied, white and chestnut or black"
-          },
-          "height": {
-            "type": "string",
-            "example": "14 to 16 hands"
-          },
-          "weight": {
-            "type": "integer",
-            "example": 1000
-          },
-          "type": {
-            "type": "string",
-            "example": "light"
-          },
-          "origin": {
-            "type": "string",
-            "example": "United States"
-          },
-          "features": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "example": ["Spotted coat", "White scelera", "Stripped hooves"]
-          }
-        },
-        "xml": {
-          "name": "updateBreeds"
-        }
-      },
-      "stables": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "example": "Haley's Horse Heaven"
-          },
-          "location": {
-            "type": "string",
-            "example": "Chantilly, VA"
-          },
-          "owner": {
-            "type": "string",
-            "example": "Haley Comet"
-          },
-          "numberOfHorses": {
-            "type": "integer",
-            "example": 38
-          }
-        }
-      },
-      "stablesWithId": {
-        "type": "object",
-        "properties": {
-          "_id": {
-            "type": "string",
-            "description": "generated by mongodb",
-            "example": "640f585d371f9553350ec0cf"
+            "example": "640cac644be6e1bbfa31a31c"
           },
           "name": {
             "type": "string",
@@ -648,55 +166,8 @@
             "example": "Haley Comet"
           },
           "numberOfHorses": {
-            "type": "integer",
+            "type": "number",
             "example": 38
-          }
-        }
-      },
-      "stablesOrder": {
-        "type": "object",
-        "properties": {
-          "horseId": {
-            "type": "string",
-            "example": "640cac644be6e1bbfa31a31c"
-          },
-          "stablesId": {
-            "type": "string",
-            "example": "640cac644be6e1bbfa31a31c"
-          }
-        }
-      },
-      "mongoDBId": {
-        "type": "string",
-        "example": "640f585d371f9553350ec0cf"
-      },
-      "ApiResponse": {
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "type": {
-            "type": "string"
-          },
-          "message": {
-            "type": "string"
-          }
-        },
-        "xml": {
-          "name": "##default"
-        }
-      }
-    },
-    "requestBodies": {
-      "Horses": {
-        "description": "Horse object that needs to be added to the store",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/breeds"
-            }
           }
         }
       }
