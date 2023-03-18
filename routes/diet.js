@@ -11,10 +11,10 @@ dietRouter.get("/", tryCatch(dietController.getAll));
 dietRouter.get("/:id", tryCatch(dietController.getSingle));
 
 // POST/diet
-dietRouter.post("/", tryCatch(dietController.createDiet));
+dietRouter.post("/", dietController.createDiet);
 
 // PUT/diet
-dietRouter.put("/:id", tryCatch(dietController.updateDiet));
+dietRouter.put("/:id", dietController.updateDiet);
 
 // DELETE/diet
 dietRouter.delete("/:id", tryCatch(dietController.deleteDiet));

@@ -100,8 +100,49 @@
       },
       "post": {
         "description": "",
-        "parameters": [],
-        "responses": {}
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "feedtype": {
+                  "example": "any"
+                },
+                "brand": {
+                  "example": "any"
+                },
+                "product": {
+                  "example": "any"
+                },
+                "source": {
+                  "example": "any"
+                },
+                "price": {
+                  "example": "any"
+                },
+                "size": {
+                  "example": "any"
+                },
+                "deliveryTime": {
+                  "example": "any"
+                },
+                "benefits": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
       }
     },
     "/diet/{id}": {
@@ -125,9 +166,52 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "feedtype": {
+                  "example": "any"
+                },
+                "brand": {
+                  "example": "any"
+                },
+                "product": {
+                  "example": "any"
+                },
+                "source": {
+                  "example": "any"
+                },
+                "price": {
+                  "example": "any"
+                },
+                "size": {
+                  "example": "any"
+                },
+                "deliveryTime": {
+                  "example": "any"
+                },
+                "benefits": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
-        "responses": {}
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
       },
       "delete": {
         "description": "",
