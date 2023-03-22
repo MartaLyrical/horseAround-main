@@ -73,6 +73,37 @@ const createOne = async (req, res) => {
 
 }
 
+// PUT/stables/{stablesId}
+const updateOne = async (req, res) => {
+  const { _id } = req.params
+  const { name, location, owner, numberOfHorses } = req.body
+
+  // Check if stable with same name, location, and owner already exists
+  const existingStable = await stablesSchema.findOne({
+    name,
+    location,
+    owner
+  })
+
+  if (existingStable) {
+    return res
+      .status(409)
+      .json({ message: `Stable '${name}' already exists, check ID '${existingStable._id}'` })
+  }
+
+  // Update stable
+  const updatedStable = await stablesSchema.findByIdAndUpdate(
+    _id, {
+    name,
+    location,
+    owner,
+    numberOfHorses
+  }, { new: true }
+  )
+
+  res.status(200).json(updatedStable);
+}
+
 // DELETE/stables/{stablesId}
 const deleteOne = async (req, res) => {
 
@@ -81,4 +112,4 @@ const deleteOne = async (req, res) => {
 
 }
 
-module.exports = { getInventory, getAll, getOne, createOne, orderOne, deleteOne };
+module.exports = { getInventory, getAll, getOne, createOne, orderOne, updateOne, deleteOne };
