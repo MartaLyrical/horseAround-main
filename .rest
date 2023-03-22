@@ -1,0 +1,48 @@
+# BASE URL
+@BASE_URL = http://localhost:8080
+
+# DEPLOY URL
+@DEPLOY_URL = https://cse-341-adolin.onrender.com
+
+# POST /api/stables/
+POST {{BASE_URL}}/stables/
+Content-Type: application/json
+
+{
+  "name": "My Stable",
+  "location": "New York",
+  "owner": "John Smith",
+  "numberOfHorses": 10
+}
+
+### GET /api/stables/inventory
+GET {{BASE_URL}}/stables/inventory
+
+### GET /api/stables/
+GET {{BASE_URL}}/stables/
+
+### GET /api/stables/{id}
+GET {{BASE_URL}}/stables/
+
+### PUT /api/stables/{id}
+PUT {{BASE_URL}}/stables/
+Content-Type: application/json
+
+{
+  "name": "Haley's Horse Heaven",
+    "location": "Chantilly, VA",
+    "owner": "Haley Comet",
+    "numberOfHorses": 38
+}
+
+### POST /api/stables/order
+POST {{BASE_URL}}/stables/order
+Content-Type: application/json
+
+{
+  "horseId": "123",
+  "stablesId": "456"
+}
+
+### DELETE /api/stables/{id}
+DELETE {{BASE_URL}}/stables/
