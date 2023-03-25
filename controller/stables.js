@@ -1,29 +1,26 @@
-const stablesSchema = require("../Schema/stables")
-const stablesOrderSchema = require("../Schema/order")
-const { IDNotFound, DuplicateError } = require('../errors/customErrors')
+const stablesSchema = require("../Schema/stables");
+const stablesOrderSchema = require("../Schema/order");
 
 // GET/stables/inventory
 const getInventory = async (req, res) => {
-  const stablesInventory = await stablesSchema.find()
+  const stablesInventory = await stablesSchema.find();
   const numberOfHorses = stablesInventory.reduce((total, stablesSchema) => total + stablesSchema.numberOfHorses, 0)
 
-  res.status(200).json(numberOfHorses)
-}
+  res.status(200).json(numberOfHorses);
+};
 
 // GET/allstables/
 const getAll = async (req, res) => {
-  const allStables = await stablesSchema.find()
-  res.status(200).json(allStables)
-}
+  const allStables = await stablesSchema.find();
+  res.status(200).json(allStables);
+};
 
 // GET/stables/{stablesId}
 const getOne = async (req, res) => {
-  const { id } = req.params
-  const stable = await stablesSchema.findById(id)
+  const stable = await stablesSchema.findById(req.params.id)
 
   if (!stable) {
-    const error = new IDNotFound(`Stable with ID ${id} not found`)
-    throw error
+    throw new Error('ID not found')
   }
 
   res.status(200).json(stable)
@@ -40,8 +37,7 @@ const orderOne = async (req, res) => {
   const existingOrder = await stablesOrderSchema.findOne({ horseId: orderReq.horseId })
 
   if (existingOrder) {
-    const error = new DuplicateError(`Horse with ID ${orderReq.horseId} already exists`)
-    throw error
+    throw new Error(`Horse with ID ${orderReq.horseId} already exists`)
   }
   const newOrder = await orderReq.save()
   res.status(201).json(newOrder._id)
@@ -68,8 +64,7 @@ const createOne = async (req, res) => {
   })
 
   if (createdStable) {
-    const error = new DuplicateError(`Stable ${stable.name} already on DB`)
-    throw error
+    throw new Error(`Stable ${stable.name} already on DB`)
   }
   const newStable = await stable.save()
   res.status(201).json(newStable._id)
@@ -84,8 +79,7 @@ const updateOne = async (req, res) => {
   // Check if stable with given ID exists
   const existingStableById = await stablesSchema.findById(id)
   if (!existingStableById) {
-    const error = new IDNotFound(`Stable with ID ${id} not found`)
-    throw error
+    throw new Error(`Stable with ID ${id} not found`)
   }
 
   // Check if stable with same name, location, and owner already exists
@@ -99,14 +93,11 @@ const updateOne = async (req, res) => {
   })
 
   if (existingStable && existingStable.id.toString() !== id) {
-    const error = new DuplicateError(`This update creates a duplicate of another saved stable data`)
-    throw error
+    throw new Error(JSON.stringify({ error: `This update creates a duplicate of another saved stable data` }))
   }
 
   if (existingStable && existingStable._id.toString() == id) {
-    const error = new DuplicateError(`The data you entered has the same data to the original one`)
-    throw error
-
+    throw new Error(`The data you entered has the same data to the original one`)
   }
 
   // Update stable
@@ -119,22 +110,19 @@ const updateOne = async (req, res) => {
   }, { new: true, runValidators: true }
   )
 
-  res.status(200).json(updatedStable)
+  if (!updatedStable) {
+    throw new Error(`Stable with ID ${id} not found`)
+  }
+
+  res.status(200).json(updatedStable);
 }
 
 // DELETE/stables/{stablesId}
 const deleteOne = async (req, res) => {
-  const { id } = req.params
-  const stable = await stablesSchema.findById(id)
-
-  if (!stable) {
-    const error = new IDNotFound(`Stable with ID ${id} not found`)
-    throw error
-  }
 
   const removedStables = await stablesSchema.deleteOne({ _id: req.params.id })
   res.status(200).json(removedStables)
 
 }
 
-module.exports = { getInventory, getAll, getOne, createOne, orderOne, updateOne, deleteOne }
+module.exports = { getInventory, getAll, getOne, createOne, orderOne, updateOne, deleteOne };
