@@ -15,42 +15,40 @@ const port = process.env.port || 8080;
 const app = express();
 
 app
-    .use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument))
-    .use(bodyParser.json())
-    .use(cors())
-    .use((req, res, next) => {
-        res.setHeader("Access-Control-Allow-Origin", "*");
-        res.setHeader("Access-Control-Allow-Headers", "*");
-        res.setHeader("Content-Type", "application/json");
-        res.setHeader(
-            "Access-Control-Allow-Methods",
-            "GET,POST,PUT,DELETE, OPTIONS"
-        );
-        next();
-    })
-    .use(routes)
-    .use(errorHandler);
+  .use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+  .use(bodyParser.json())
+  .use(cors())
+  .use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Headers", "*");
+    res.setHeader("Content-Type", "application/json");
+    res.setHeader(
+      "Access-Control-Allow-Methods",
+      "GET,POST,PUT,DELETE, OPTIONS"
+    );
+    next();
+  })
+  .use(routes)
+  .use(errorHandler);
 
 mongoose.initDb((err) => {
-    if (err) {
-        console.log(err);
-    } else {
+  if (err) {
+    console.log(err);
+  } else {
 
-        console.log(`Connected to mongoose`);
-    }
+    console.log(`Connected to mongoose`);
+  }
 });
 
 mongoClient.initDb((err) => {
-    if (err) {
-        console.log(err);
-    } else {
+  if (err) {
+    console.log(err);
+  } else {
 
-        console.log(`Connected to mongoClient`);
-    }
+    console.log(`Connected to mongoClient`);
+  }
 });
 
-const server = app.listen(port, () => {
-    console.log(`App running on port ${port}`)
-})
-
-module.exports = { app, server }
+app.listen(port, () => {
+  console.log(`App running on port ${port}`);
+});

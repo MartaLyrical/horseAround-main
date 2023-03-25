@@ -1,11 +1,11 @@
 const express = require('express')
 
 const router = express.Router()
-// router.use("/", require("./swagger"))
+// router.use("/", require("./swagger"));
 
 // for testing only
 router.get('/', (req, res) => {
-    res.status(200).json({ message: 'Home' })
+    res.send('Home')
 })
 
 // routes goes here
