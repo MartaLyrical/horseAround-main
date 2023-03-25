@@ -37,7 +37,8 @@ const orderOne = async (req, res) => {
   const existingOrder = await stablesOrderSchema.findOne({ horseId: orderReq.horseId })
 
   if (existingOrder) {
-    throw new Error(`Horse with ID ${orderReq.horseId} already exists`)
+    console.log("Order exist")
+    return res.status(400).json({ message: `Horse with ID ${orderReq.horseId} already exists` });
   }
   const newOrder = await orderReq.save()
   res.status(201).json(newOrder._id)
@@ -64,7 +65,8 @@ const createOne = async (req, res) => {
   })
 
   if (createdStable) {
-    throw new Error(`Stable ${stable.name} already on DB`)
+    console.log("already exists in db")
+    return res.status(409).json({ message: `Stable ${stable.name} already on DB` });
   }
   const newStable = await stable.save()
   res.status(201).json(newStable._id)
@@ -84,7 +86,9 @@ const updateOne = async (req, res) => {
   })
 
   if (existingStable) {
-    throw new Error(`Stable '${name}' already exists, check ID '${existingStable._id}'`)
+    return res
+      .status(409)
+      .json({ message: `Stable '${name}' already exists, check ID '${existingStable._id}'` })
   }
 
   // Update stable
@@ -94,7 +98,7 @@ const updateOne = async (req, res) => {
     location,
     owner,
     numberOfHorses
-  }, { new: true, runValidators: true }
+  }, { new: true }
   )
 
   res.status(200).json(updatedStable);
