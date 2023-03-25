@@ -4,7 +4,7 @@ const stablesRouter = express.Router()
 const stablesController = require('../controller/stables')
 const { tryCatch } = require("../utils/tryCatch")
 
-// GET /stables/
+// GET/allstables/
 stablesRouter.get('/',
     tryCatch(
         // #swagger.tags = ['Stables']
@@ -17,46 +17,47 @@ stablesRouter.get('/',
     )
 )
 
-// GET /stables/{stablesId}
-stablesRouter.get('/:id',
-    tryCatch(
-        stablesController.getOne
-    )
-)
-
-// POST /stables/
-stablesRouter.post('/',
-    tryCatch(
-        stablesController.createOne
-    )
-)
-
-// PUT /stables/{stablesId}
-stablesRouter.put('/:id',
-    tryCatch(
-        stablesController.updateOne
-    )
-)
-
-// DELETE /stables/{stablesId}
-stablesRouter.delete('/:id',
-    tryCatch(
-        //swagger docs code goes here
-        stablesController.deleteOne
-    )
-)
-
-// GET /stables/inventory
+// GET/stables/inventory
 stablesRouter.get('/inventory',
     tryCatch(
         stablesController.getInventory
     )
 )
 
-// POST /stables/order
+// POST/stables/order
 stablesRouter.post('/order',
     tryCatch(
         stablesController.orderOne
+    )
+)
+
+// POST/stables/
+stablesRouter.post('/',
+    tryCatch(
+        stablesController.createOne
+    )
+)
+
+// GET/stables/{stablesId}
+stablesRouter.get('/:id',
+    tryCatch(
+        stablesController.getOne
+    )
+)
+
+// PUT/stables/{stablesId}
+stablesRouter.put(
+    '/:id',
+    tryCatch(
+        stablesController.updateOne
+    )
+)
+
+// DELETE/stables/{stablesId}
+stablesRouter.delete('/:id',
+    tryCatch(
+        //swagger docs code goes here
+        stablesController.deleteOne
     )
 )
 
