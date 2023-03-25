@@ -78,20 +78,13 @@ const updateOne = async (req, res) => {
 
   // Check if stable with same name, location, and owner already exists
   const existingStable = await stablesSchema.findOne({
-    $and: [
-      { name },
-      { location },
-      { owner },
-      { numberOfHorses }
-    ]
+    name,
+    location,
+    owner
   })
 
-  if (existingStable && existingStable._id.toString() !== _id) {
-    throw new Error(`This update creates a duplicate of another saved stable data`)
-  }
-
-  if (existingStable && existingStable._id.toString() == _id) {
-    throw new Error(`The data you entered has the same data to the original one`)
+  if (existingStable) {
+    throw new Error(`Stable '${name}' already exists, check ID '${existingStable._id}'`)
   }
 
   // Update stable
@@ -103,10 +96,6 @@ const updateOne = async (req, res) => {
     numberOfHorses
   }, { new: true, runValidators: true }
   )
-
-  if (!updatedStable) {
-    throw new Error(`Stable with ID ${_id} not found`)
-  }
 
   res.status(200).json(updatedStable);
 }
