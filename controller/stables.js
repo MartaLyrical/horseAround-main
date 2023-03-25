@@ -34,6 +34,8 @@ const orderOne = async (req, res) => {
     stablesId: req.body.horseId
   })
 
+  console.log(orderReq.horseId)
+
   const existingOrder = await stablesOrderSchema.findOne({ horseId: orderReq.horseId })
 
   if (existingOrder) {
@@ -46,33 +48,6 @@ const orderOne = async (req, res) => {
 
 }
 
-// POST/stables/
-const createOne = async (req, res) => {
-
-  const stable = new stablesSchema({
-    name: req.body.name,
-    location: req.body.location,
-    owner: req.body.owner,
-    numberOfHorses: req.body.numberOfHorses
-  })
-
-  const createdStable = await stablesSchema.findOne({
-    $and: [
-      { name: stable.name },
-      { location: stable.location },
-      { owner: stable.owner }
-    ]
-  })
-
-  if (createdStable) {
-    console.log("already exists in db")
-    return res.status(409).json({ message: `Stable ${stable.name} already on DB` });
-  }
-  const newStable = await stable.save()
-  res.status(201).json(newStable._id)
-
-}
-
 // DELETE/stables/{stablesId}
 const deleteOne = async (req, res) => {
 
@@ -81,4 +56,4 @@ const deleteOne = async (req, res) => {
 
 }
 
-module.exports = { getInventory, getAll, getOne, createOne, orderOne, deleteOne };
+module.exports = { getInventory, getAll, getOne, orderOne, deleteOne };

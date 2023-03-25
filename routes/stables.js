@@ -31,13 +31,6 @@ stablesRouter.post('/order',
     )
 )
 
-// POST/stables/
-stablesRouter.post('/',
-    tryCatch(
-        stablesController.createOne
-    )
-)
-
 // GET/stables/{stablesId}
 stablesRouter.get('/:id',
     tryCatch(
