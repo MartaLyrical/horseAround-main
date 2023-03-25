@@ -45,13 +45,6 @@ stablesRouter.get('/:id',
     )
 )
 
-// PUT/stables/{stablesId}
-stablesRouter.put(
-    '/:id',
-    tryCatch(
-        stablesController.updateOne
-    )
-)
 
 // DELETE/stables/{stablesId}
 stablesRouter.delete('/:id',
