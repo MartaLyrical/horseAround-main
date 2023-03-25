@@ -5,7 +5,7 @@
     "description": "Horses API",
     "version": "1.0.0"
   },
-  "host": "cse-341-adolin.onrender.com",
+  "host": "localhost:8080",
   "basePath": "/",
   "tags": [
     {
@@ -14,7 +14,7 @@
     }
   ],
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
     "/": {
