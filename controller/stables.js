@@ -3,7 +3,7 @@ const stablesOrderSchema = require("../Schema/order")
 const { IDNotFound, DuplicateError } = require('../errors/customErrors')
 
 // GET/stables/inventory
-const getInventory = async(req, res) => {
+const getInventory = async (req, res) => {
     const stablesInventory = await stablesSchema.find()
     const numberOfHorses = stablesInventory.reduce((total, stablesSchema) => total + stablesSchema.numberOfHorses, 0)
 
@@ -11,13 +11,13 @@ const getInventory = async(req, res) => {
 }
 
 // GET/allstables/
-const getAll = async(req, res) => {
+const getAll = async (req, res) => {
     const allStables = await stablesSchema.find()
     res.status(200).json(allStables)
 }
 
 // GET/stables/{stablesId}
-const getOne = async(req, res) => {
+const getOne = async (req, res) => {
     const { id } = req.params
     const stable = await stablesSchema.findById(id)
 
@@ -30,7 +30,7 @@ const getOne = async(req, res) => {
 }
 
 // POST/stables/order
-const orderOne = async(req, res) => {
+const orderOne = async (req, res) => {
 
     const orderReq = new stablesOrderSchema({
         horseId: req.body.horseId,
@@ -50,7 +50,7 @@ const orderOne = async(req, res) => {
 }
 
 // POST/stables/
-const createOne = async(req, res) => {
+const createOne = async (req, res) => {
 
     const stable = new stablesSchema({
         name: req.body.name,
@@ -77,7 +77,7 @@ const createOne = async(req, res) => {
 }
 
 // PUT/stables/{stablesId}
-const updateOne = async(req, res) => {
+const updateOne = async (req, res) => {
     const { id } = req.params
     const { name, location, owner, numberOfHorses } = req.body
 
@@ -112,18 +112,18 @@ const updateOne = async(req, res) => {
     // Update stable
     const updatedStable = await stablesSchema.findByIdAndUpdate(
         id, {
-            name,
-            location,
-            owner,
-            numberOfHorses
-        }, { new: true, runValidators: true }
+        name,
+        location,
+        owner,
+        numberOfHorses
+    }, { new: true, runValidators: true }
     )
 
     res.status(200).json(updatedStable)
 }
 
 // DELETE/stables/{stablesId}
-const deleteOne = async(req, res) => {
+const deleteOne = async (req, res) => {
     const { id } = req.params
     const stable = await stablesSchema.findById(id)
 
