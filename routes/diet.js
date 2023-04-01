@@ -2,21 +2,21 @@ const express = require("express");
 
 const dietRouter = express.Router();
 const dietController = require("../controller/diet");
-const { tryCatch } = require("../utils/tryCatch");
+// const { tryCatch } = require("../utils/tryCatch");
 
 // GET/alldiets/
-dietRouter.get("/", tryCatch(dietController.getAll));
+dietRouter.get("/", dietController.getAll);
 
 // GET/diet/{dietId}
-dietRouter.get("/:id", tryCatch(dietController.getSingle));
+dietRouter.get("/:id", dietController.getSingle);
 
 // POST/diet
-dietRouter.post("/", tryCatch(dietController.createDiet));
+dietRouter.post("/", dietController.createDiet);
 
 // PUT/diet
-dietRouter.put("/:id", tryCatch(dietController.updateDiet));
+dietRouter.put("/:id", dietController.updateDiet);
 
 // DELETE/diet
-dietRouter.delete("/:id", tryCatch(dietController.deleteDiet));
+dietRouter.delete("/:id", dietController.deleteDiet);
 
 module.exports = dietRouter;
