@@ -2,7 +2,7 @@ const express = require("express");
 
 const ownersRouter = express.Router();
 const ownersController = require("../controller/owners");
-// const validation = require("../middleware/validateOwner");
+const validation = require("../middleware/validateOwner");
 
 ownersRouter.get("/", ownersController.getAll);
 //adding validation to the post and put
