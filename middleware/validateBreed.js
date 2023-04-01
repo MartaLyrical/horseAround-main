@@ -4,11 +4,11 @@ const createBreed = (req, res, next) => {
   const validationRule = {
     breedName: "required|string",
     color: "required|string",
-    height: "required|integer",
+    height: "required|string",
     weight: "required|integer",
     type: "required|string",
     origin: "required|string",
-    features: "required|string"
+    features: "required|array"
   };
   validator(req.body, validationRule, {}, (err, status) => {
     if (!status) {

@@ -50,7 +50,7 @@ const createDiet = async (req, res) => {
 // PUT/diet
 const updateDiet = async (req, res) => {
   if (!ObjectId.isValid(req.params.id)) {
-    res.status(400).json("You must use a valied recipe ID to update a recipe.");
+    res.status(400).json("You must use a valid diet ID to update a diet.");
   }
   const dietId = new ObjectId(req.params.id);
 
