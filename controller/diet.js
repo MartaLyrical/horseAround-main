@@ -22,6 +22,7 @@ const getSingle = async (req, res) => {
 
 // POST/diet
 const createDiet = async (req, res) => {
+  console.log("Adding a new diet...");
   const diet = {
     feedtype: req.body.feedtype,
     brand: req.body.brand,

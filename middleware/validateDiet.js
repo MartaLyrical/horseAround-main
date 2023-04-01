@@ -1,14 +1,15 @@
 const validator = require("../helpers/validateBreed");
-//validation to create a new breed
-const createBreed = (req, res, next) => {
+//validation to create a new diet
+const createDiet = (req, res, next) => {
   const validationRule = {
-    breedName: "required|string",
-    color: "required|string",
-    height: "required|integer",
-    weight: "required|integer",
-    type: "required|string",
-    origin: "required|string",
-    features: "required|string"
+    feedtype: "required|string",
+    brand: "required|string",
+    product: "required|string",
+    source: "required|string",
+    price: "required|numeric",
+    size: "required|numeric",
+    deliveryTime: "required|integer",
+    benefits: "required|array"
   };
   validator(req.body, validationRule, {}, (err, status) => {
     if (!status) {
@@ -24,5 +25,5 @@ const createBreed = (req, res, next) => {
 };
 
 module.exports = {
-  createBreed,
+  createDiet,
 };

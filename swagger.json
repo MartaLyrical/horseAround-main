@@ -463,6 +463,9 @@
           "201": {
             "description": "Created"
           },
+          "412": {
+            "description": "Precondition Failed"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -538,6 +541,9 @@
           },
           "400": {
             "description": "Bad Request"
+          },
+          "412": {
+            "description": "Precondition Failed"
           },
           "500": {
             "description": "Internal Server Error"
