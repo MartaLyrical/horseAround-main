@@ -3,20 +3,21 @@ const express = require('express')
 const stablesRouter = express.Router()
 const stablesController = require('../controller/stables')
 const { tryCatch } = require("../utils/tryCatch")
+const errorHandler = require("../middleware/errorHandler")
 
 // GET /stables/
 stablesRouter.get('/',
-        tryCatch(
-            // #swagger.tags = ['Stables']
-            // #swagger.description = 'Displays an array of Stables document.'
-            /* #swagger.responses[200] = { 
-                      description: 'Returns all stables document in stables collection',
-                      schema: { $ref: "#/definitions/Stables" }
-                 } */
-            stablesController.getAll
-        )
+    tryCatch(
+        // #swagger.tags = ['Stables']
+        // #swagger.description = 'Displays an array of Stables document.'
+        /* #swagger.responses[200] = { 
+                  description: 'Returns all stables document in stables collection',
+                  schema: { $ref: "#/definitions/Stables" }
+             } */
+        stablesController.getAll
     )
-    // GET /stables/inventory
+)
+// GET /stables/inventory
 stablesRouter.get('/inventory',
     tryCatch(
         stablesController.getInventory
@@ -60,5 +61,7 @@ stablesRouter.post('/order',
         stablesController.orderOne
     )
 )
+
+stablesRouter.use(errorHandler)
 
 module.exports = stablesRouter
