@@ -5,6 +5,8 @@ const stablesController = require('../controller/stables')
 const { tryCatch } = require("../utils/tryCatch")
 const errorHandler = require("../middleware/errorHandler")
 
+const { requiresAuth } = require('express-openid-connect')
+
 // GET /stables/
 stablesRouter.get('/',
     tryCatch(
@@ -33,6 +35,7 @@ stablesRouter.get('/:id',
 
 // POST /stables/
 stablesRouter.post('/',
+    requiresAuth(),
     tryCatch(
         stablesController.createOne
     )
@@ -40,6 +43,7 @@ stablesRouter.post('/',
 
 // PUT /stables/{stablesId}
 stablesRouter.put('/:id',
+    requiresAuth(),
     tryCatch(
         stablesController.updateOne
     )
@@ -47,6 +51,7 @@ stablesRouter.put('/:id',
 
 // DELETE /stables/{stablesId}
 stablesRouter.delete('/:id',
+    requiresAuth(),
     tryCatch(
         //swagger docs code goes here
         stablesController.deleteOne
@@ -57,6 +62,7 @@ stablesRouter.delete('/:id',
 
 // POST /stables/order
 stablesRouter.post('/order',
+    requiresAuth(),
     tryCatch(
         stablesController.orderOne
     )
