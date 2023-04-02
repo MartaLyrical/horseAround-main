@@ -1,0 +1,104 @@
+# BASE URL
+@BASE_URL = http://localhost:8080
+
+# DEPLOY URL
+@DEPLOY_URL = https://cse-341-adolin.onrender.com
+
+### Base/Production
+# POST /api/stables/
+POST {{BASE_URL}}/diet/
+Content-Type: application/json
+
+{
+  "feedtype": "testing feed",
+  "brand": "Testing Brand",
+  "product": "Texas Testing Tastees",
+  "source": "Dan Testing Food",
+  "price": 49.99,
+  "size": 50,
+  "deliveryTime": 5,
+  "benefits": [
+    "This is the first benefit",
+    "There is a second benefit",
+    "I couldn't think of a third"
+  ]
+}
+
+### GET /api/diet/
+GET {{BASE_URL}}/diet/
+
+### GET /api/diet/{id}
+GET {{BASE_URL}}/diet/64284bb684ff7d254fc41a24
+
+### PUT /api/diet/{id}
+PUT {{BASE_URL}}/diet/6429f653a3e2cf7d8b8a8a4a
+Content-Type: application/json
+
+{
+  "feedtype": "new testing feed",
+  "brand": "New Testing Brand",
+  "product": "Texas Testing Tastees",
+  "source": "Dan Testing Food",
+  "price": 99.99,
+  "size": 50,
+  "deliveryTime": 5,
+  "benefits": [
+    "This is the first benefit",
+    "There is a second benefit",
+    "I couldn't think of a third",
+    "This shows an update"
+  ]
+}
+
+### DELETE /api/diet/{id}
+DELETE {{BASE_URL}}/diet/6429f653a3e2cf7d8b8a8a4a
+
+
+### Deployment
+# POST /api/stables/
+POST {{{DEPLOY_URL}}}/diet/
+Content-Type: application/json
+
+{
+  "feedtype": "testing feed",
+  "brand": "Testing Brand",
+  "product": "Texas Testing Tastees",
+  "source": "Dan Testing Food",
+  "price": 49.99,
+  "size": 50,
+  "deliveryTime": 5,
+  "benefits": [
+    "This is the first benefit",
+    "There is a second benefit",
+    "I couldn't think of a third"
+  ]
+}
+
+### GET /api/diet/
+GET {{DEPLOY_URL}}/diet/
+
+### GET /api/diet/{id}
+GET {{DEPLOY_URL}}/diet/64284bb684ff7d254fc41a24
+
+### PUT /api/diet/{id}
+PUT {{DEPLOY_URL}}/diet/
+Content-Type: application/json
+
+{
+  "feedtype": "new testing feed",
+  "brand": "New Testing Brand",
+  "product": "Texas Testing Tastees",
+  "source": "Dan Testing Food",
+  "price": 99.99,
+  "size": 50,
+  "deliveryTime": 5,
+  "benefits": [
+    "This is the first benefit",
+    "There is a second benefit",
+    "I couldn't think of a third",
+    "This shows an update"
+  ]
+}
+
+### DELETE /api/diet/{id}
+DELETE {{DEPLOY_URL}}/diet/
