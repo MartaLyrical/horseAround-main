@@ -17,6 +17,7 @@
   "homepage": "hhttps://github.com/MartaLyrical/horseAround-main.git#readme",
   "devDependencies": {
     "dotenv": "^16.0.3",
+    "jest": "^29.5.0",
     "nodemon": "^2.0.22",
     "swagger-autogen": "^2.23.1"
   },
