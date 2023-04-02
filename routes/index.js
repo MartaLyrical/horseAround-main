@@ -1,5 +1,5 @@
 const express = require('express');
-const { auth } = require('express-openid-connect');
+const { auth, requiresAuth } = require('express-openid-connect');
 
 const router = express.Router()
 // router.use("/", require("./swagger"));
@@ -20,6 +20,10 @@ router.use(auth(config));
 router.get('/', (req, res) => {
     res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
 });
+
+router.get('/profile', requiresAuth(), (req, res) => {
+    res.send(`Welcome ${req.oidc.user.name}!`)
+})
 
 // routes goes here
 router.use('/stables', require('./stables'))
