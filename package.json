@@ -9,15 +9,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jeremiahMiclat/horseAround.git"
+    "url": "git+https://github.com/MartaLyrical/horseAround-main.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jeremiahMiclat/horseAround/issues"
-  },
-  "homepage": "https://github.com/jeremiahMiclat/horseAround#readme",
+  "homepage": "hhttps://github.com/MartaLyrical/horseAround-main.git#readme",
   "devDependencies": {
     "dotenv": "^16.0.3",
     "nodemon": "^2.0.22",
@@ -27,6 +24,7 @@
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "express": "^4.18.2",
+    "express-openid-connect": "^2.13.0",
     "mongoclient": "^1.0.3",
     "mongodb": "^5.1.0",
     "mongodb-client": "^0.0.0",
