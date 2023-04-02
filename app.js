@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 const mongoose = require("./db/mongooseDb");
 const mongoClient = require("./db/mongoClientDb");
 const routes = require("./routes");
-const errorHandler = require("./middleware/errorHandler");
+// const errorHandler = require("./middleware/errorHandler");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
 

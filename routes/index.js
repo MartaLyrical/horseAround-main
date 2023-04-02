@@ -17,9 +17,6 @@ const config = {
 router.use(auth(config));
 
 // for testing only
-// router.get('/', (req, res) => {
-//     res.send('Home')
-// })
 router.get('/', (req, res) => {
     res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
 });
