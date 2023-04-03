@@ -44,7 +44,7 @@ const orderOne = async (req, res) => {
         throw error
     }
     const newOrder = await orderReq.save()
-    res.status(201).json(newOrder._id)
+    res.status(201).json({ "New Order": `${newOrder._id}` })
 
 
 }
