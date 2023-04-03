@@ -4,7 +4,14 @@
 # DEPLOY URL
 @DEPLOY_URL = https://cse-341-adolin.onrender.com
 
-### Base/Production
+### LOCALHOST Deployment
+
+### GET /api/diet/
+GET {{BASE_URL}}/diet/
+
+### GET /api/diet/{id}
+GET {{BASE_URL}}/diet/64284bb684ff7d254fc41a24
+
 # POST /api/stables/
 POST {{BASE_URL}}/diet/
 Content-Type: application/json
@@ -23,12 +30,6 @@ Content-Type: application/json
     "I couldn't think of a third"
   ]
 }
-
-### GET /api/diet/
-GET {{BASE_URL}}/diet/
-
-### GET /api/diet/{id}
-GET {{BASE_URL}}/diet/64284bb684ff7d254fc41a24
 
 ### PUT /api/diet/{id}
 PUT {{BASE_URL}}/diet/6429f653a3e2cf7d8b8a8a4a
@@ -54,7 +55,14 @@ Content-Type: application/json
 DELETE {{BASE_URL}}/diet/6429f653a3e2cf7d8b8a8a4a
 
 
-### Deployment
+### RENDER Deployment
+
+### GET /api/diet/
+GET {{DEPLOY_URL}}/diet/
+
+### GET /api/diet/{id}
+GET {{DEPLOY_URL}}/diet/64284bb684ff7d254fc41a24
+
 # POST /api/stables/
 POST {{{DEPLOY_URL}}}/diet/
 Content-Type: application/json
@@ -73,12 +81,6 @@ Content-Type: application/json
     "I couldn't think of a third"
   ]
 }
-
-### GET /api/diet/
-GET {{DEPLOY_URL}}/diet/
-
-### GET /api/diet/{id}
-GET {{DEPLOY_URL}}/diet/64284bb684ff7d254fc41a24
 
 ### PUT /api/diet/{id}
 PUT {{DEPLOY_URL}}/diet/
