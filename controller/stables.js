@@ -7,7 +7,7 @@ const getInventory = async (req, res) => {
     const stablesInventory = await stablesSchema.find()
     const numberOfHorses = stablesInventory.reduce((total, stablesSchema) => total + stablesSchema.numberOfHorses, 0)
 
-    res.status(200).json(numberOfHorses)
+    res.status(200).json({ "numberOfHorses": `${numberOfHorses}` })
 }
 
 // GET/allstables/
