@@ -72,7 +72,7 @@ const createOne = async (req, res) => {
         throw error
     }
     const newStable = await stable.save()
-    res.status(201).json(newStable._id)
+    res.status(201).json({ "Created Stable _Id": `${newStable._id}` })
 
 }
 
