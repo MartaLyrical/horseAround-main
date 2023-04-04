@@ -12,7 +12,7 @@ GET {{BASE_URL}}/diet/
 ### GET /api/diet/{id}
 GET {{BASE_URL}}/diet/64284bb684ff7d254fc41a24
 
-# POST /api/stables/
+### POST /api/stables/
 POST {{BASE_URL}}/diet/
 Content-Type: application/json
 
@@ -32,7 +32,7 @@ Content-Type: application/json
 }
 
 ### PUT /api/diet/{id}
-PUT {{BASE_URL}}/diet/6429f653a3e2cf7d8b8a8a4a
+PUT {{BASE_URL}}/diet/642b5f5320d1f180a9253ded
 Content-Type: application/json
 
 {
@@ -52,7 +52,7 @@ Content-Type: application/json
 }
 
 ### DELETE /api/diet/{id}
-DELETE {{BASE_URL}}/diet/6429f653a3e2cf7d8b8a8a4a
+DELETE {{BASE_URL}}/diet/642b5f5320d1f180a9253ded
 
 
 ### RENDER Deployment
