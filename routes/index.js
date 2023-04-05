@@ -17,12 +17,37 @@ const config = {
 router.use(auth(config));
 
 // for testing only
-router.get('/', (req, res) => {
-    res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
-});
+router.get('/',
+    // #swagger.tags = ['home']
+    // #swagger.summary = 'Homepage.'
+    /* #swagger.responses[200] = { 
+              description: 'Success'
+         } */
+    /* #swagger.responses[500] = { 
+              description: 'Internal Server Error',
+              schema: { $ref: "#/definitions/error" }
+         } */
+    (req, res) => {
+        const response = {
+            state: req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out'
+        };
+        res.json(response);
+    });
 
 router.get('/profile', requiresAuth(), (req, res) => {
-    res.send(`Welcome ${req.oidc.user.name}!`)
+    // #swagger.tags = ['home']
+    // #swagger.summary = 'profile.'
+    /* #swagger.responses[200] = { 
+              description: 'Success'
+         } */
+    /* #swagger.responses[500] = { 
+              description: 'Internal Server Error',
+              schema: { $ref: "#/definitions/error" }
+         } */
+    const response = {
+        message: `Welcome ${req.oidc.user.name}!`
+    };
+    res.json(response);
 })
 
 // routes goes here

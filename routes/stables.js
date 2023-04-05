@@ -11,10 +11,14 @@ const { requiresAuth } = require('express-openid-connect')
 stablesRouter.get('/',
     tryCatch(
         // #swagger.tags = ['Stables']
-        // #swagger.description = 'Displays an array of Stables document.'
+        // #swagger.summary = 'Displays an array of Stables document.'
         /* #swagger.responses[200] = { 
-                  description: 'Returns all stables document in stables collection',
+                  description: 'Success',
                   schema: { $ref: "#/definitions/Stables" }
+             } */
+        /* #swagger.responses[500] = { 
+                  description: 'Internal Server Error',
+                  schema: { $ref: "#/definitions/error" }
              } */
         stablesController.getAll
     )
@@ -22,6 +26,16 @@ stablesRouter.get('/',
 // GET /stables/inventory
 stablesRouter.get('/inventory',
     tryCatch(
+        // #swagger.tags = ['Stables']
+        // #swagger.summary = 'Displays sum of numberOfHorses of stables documents.'
+        /* #swagger.responses[200] = { 
+                  description: 'Success',
+                  schema: { $ref: "#/definitions/Stables" }
+             } */
+        /* #swagger.responses[500] = { 
+                  description: 'Internal Server Error',
+                  schema: { $ref: "#/definitions/error" }
+             } */
         stablesController.getInventory
     )
 )
@@ -29,6 +43,21 @@ stablesRouter.get('/inventory',
 // GET /stables/{stablesId}
 stablesRouter.get('/:id',
     tryCatch(
+        // #swagger.tags = ['Stables']
+        // #swagger.summary = 'Get stable by id.'
+        // #swagger.description = 'Provide valid mongodb Id for successful operation.'
+        /* #swagger.responses[200] = { 
+                  description: 'Success',
+                  schema: { $ref: "#/definitions/Stables" }
+             } */
+        /* #swagger.responses[404] = { 
+                  description: 'Not found',
+                  schema: { $ref: "#/definitions/error" }
+             } */
+        /* #swagger.responses[500] = { 
+                  description: 'Internal Server Error',
+                  schema: { $ref: "#/definitions/error" }
+             } */
         stablesController.getOne
     )
 )
@@ -37,6 +66,25 @@ stablesRouter.get('/:id',
 stablesRouter.post('/',
     requiresAuth(),
     tryCatch(
+        // #swagger.tags = ['Stables']
+        // #swagger.summary = 'Create new stable.'
+        // #swagger.description = 'Requires authentication.'
+        /* #swagger.responses[201] = { 
+                  description: 'Created',
+                  schema: { $ref: "#/definitions/mongoDbId" }
+             } */
+        /* #swagger.responses[401] = { 
+                  description: 'Unauthorized',
+                  schema: { $ref: "#/definitions/error" }
+             } */
+        /* #swagger.responses[409] = { 
+             description: 'Conflict/Duplicate',
+             schema: { $ref: "#/definitions/error" }
+        } */
+        /* #swagger.responses[500] = { 
+                  description: 'Internal Server Error',
+                  schema: { $ref: "#/definitions/error" }
+             } */
         stablesController.createOne
     )
 )
@@ -45,6 +93,29 @@ stablesRouter.post('/',
 stablesRouter.put('/:id',
     requiresAuth(),
     tryCatch(
+        // #swagger.tags = ['Stables']
+        // #swagger.summary = 'Update a stable.'
+        // #swagger.description = 'Requires authentication and valid mongodbId.'
+        /* #swagger.responses[200] = { 
+                  description: 'Success',
+                  schema: { $ref: "#/definitions/mongoDbId" }
+             } */
+        /* #swagger.responses[401] = { 
+                  description: 'Unauthorized',
+                  schema: { $ref: "#/definitions/error" }
+             } */
+        /* #swagger.responses[404] = { 
+             description: 'Not found',
+             schema: { $ref: "#/definitions/error" }
+        } */
+        /* #swagger.responses[409] = { 
+             description: 'Conflict/Duplicate',
+             schema: { $ref: "#/definitions/error" }
+        } */
+        /* #swagger.responses[500] = { 
+                  description: 'Internal Server Error',
+                  schema: { $ref: "#/definitions/error" }
+             } */
         stablesController.updateOne
     )
 )
@@ -53,7 +124,25 @@ stablesRouter.put('/:id',
 stablesRouter.delete('/:id',
     requiresAuth(),
     tryCatch(
-        //swagger docs code goes here
+        // #swagger.tags = ['Stables']
+        // #swagger.summary = 'Delete a stable.'
+        // #swagger.description = 'Requires authentication and valid mongodbId.'
+        /* #swagger.responses[200] = { 
+                  description: 'Success',
+                  schema: { $ref: "#/definitions/successDelete" }
+             } */
+        /* #swagger.responses[401] = { 
+                  description: 'Unauthorized',
+                  schema: { $ref: "#/definitions/error" }
+             } */
+        /* #swagger.responses[404] = { 
+             description: 'Not found',
+             schema: { $ref: "#/definitions/error" }
+        } */
+        /* #swagger.responses[500] = { 
+                  description: 'Internal Server Error',
+                  schema: { $ref: "#/definitions/error" }
+             } */
         stablesController.deleteOne
     )
 )
@@ -64,6 +153,25 @@ stablesRouter.delete('/:id',
 stablesRouter.post('/order',
     requiresAuth(),
     tryCatch(
+        // #swagger.tags = ['Stables']
+        // #swagger.summary = 'Create new order.'
+        // #swagger.description = 'Requires authentication.'
+        /* #swagger.responses[201] = { 
+                  description: 'Created',
+                  schema: { $ref: "#/definitions/mongoDbId" }
+             } */
+        /* #swagger.responses[401] = { 
+                  description: 'Unauthorized',
+                  schema: { $ref: "#/definitions/error" }
+             } */
+        /* #swagger.responses[409] = { 
+             description: 'Conflict/Duplicate',
+             schema: { $ref: "#/definitions/error" }
+        } */
+        /* #swagger.responses[500] = { 
+                  description: 'Internal Server Error',
+                  schema: { $ref: "#/definitions/error" }
+             } */
         stablesController.orderOne
     )
 )

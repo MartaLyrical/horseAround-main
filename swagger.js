@@ -9,22 +9,38 @@ const doc = {
   schemes: ["http"],
   // host: "cse-341-adolin.onrender.com",
   // schemes: ["https"],
-  tags: [
-    {
-      name: "Stables",
-      description: "endpoints for stables",
-    },
-  ],
+  tags: [{
+    name: "Stables",
+    description: "endpoints for stables",
+  }, {
+    name: "home",
+    description: "homepage & profile"
+  }],
   definitions: {
-    Stables: [
-      {
-        _id: "640cac644be6e1bbfa31a31c",
-        name: "Haley's Horse Heaven",
-        location: "Chantilly, VA",
-        owner: "Haley Comet",
-        numberOfHorses: 38,
-      },
-    ],
+    Stables: [{
+      _id: "642d2fc54ba6769cf0c8162c",
+      name: "Haley's Horse Heaven",
+      location: "Chantilly, VA",
+      numberOfHorses: 38,
+      owner: "Haley Comet",
+      __v: 0
+    }],
+    createStable: {
+      name: "Haley's Horse Heaven",
+      location: "Chantilly, VA",
+      numberOfHorses: 38,
+      owner: "Haley Comet",
+    },
+    mongoDbId: {
+      _id: "<mongo_db_id>"
+    },
+    successDelete: {
+      "acknowledged": true,
+      "deletedCount": 1
+    },
+    error: {
+      error: "Error message"
+    }
   },
 };
 

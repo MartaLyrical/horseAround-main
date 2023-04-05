@@ -11,6 +11,10 @@
     {
       "name": "Stables",
       "description": "endpoints for stables"
+    },
+    {
+      "name": "home",
+      "description": "homepage & profile"
     }
   ],
   "schemes": [
@@ -19,22 +23,42 @@
   "paths": {
     "/": {
       "get": {
+        "tags": [
+          "home"
+        ],
+        "summary": "Homepage.",
         "description": "",
         "parameters": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           }
         }
       }
     },
     "/profile": {
       "get": {
+        "tags": [
+          "home"
+        ],
+        "summary": "profile.",
         "description": "",
         "parameters": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           }
         }
       }
@@ -44,33 +68,90 @@
         "tags": [
           "Stables"
         ],
-        "description": "Displays an array of Stables document.",
+        "summary": "Displays an array of Stables document.",
+        "description": "",
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Returns all stables document in stables collection",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/Stables"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/error"
             }
           }
         }
       },
       "post": {
-        "description": "",
+        "tags": [
+          "Stables"
+        ],
+        "summary": "Create new stable.",
+        "description": "Requires authentication.",
         "parameters": [],
-        "responses": {}
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/mongoDbId"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "409": {
+            "description": "Conflict/Duplicate",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
       }
     },
     "/stables/inventory": {
       "get": {
+        "tags": [
+          "Stables"
+        ],
+        "summary": "Displays sum of numberOfHorses of stables documents.",
         "description": "",
         "parameters": [],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Stables"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
       }
     },
     "/stables/{id}": {
       "get": {
-        "description": "",
+        "tags": [
+          "Stables"
+        ],
+        "summary": "Get stable by id.",
+        "description": "Provide valid mongodb Id for successful operation.",
         "parameters": [
           {
             "name": "id",
@@ -79,10 +160,33 @@
             "type": "string"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Stables"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
       },
       "put": {
-        "description": "",
+        "tags": [
+          "Stables"
+        ],
+        "summary": "Update a stable.",
+        "description": "Requires authentication and valid mongodbId.",
         "parameters": [
           {
             "name": "id",
@@ -91,10 +195,45 @@
             "type": "string"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/mongoDbId"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "409": {
+            "description": "Conflict/Duplicate",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
       },
       "delete": {
-        "description": "",
+        "tags": [
+          "Stables"
+        ],
+        "summary": "Delete a stable.",
+        "description": "Requires authentication and valid mongodbId.",
         "parameters": [
           {
             "name": "id",
@@ -103,14 +242,68 @@
             "type": "string"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/successDelete"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
       }
     },
     "/stables/order": {
       "post": {
-        "description": "",
+        "tags": [
+          "Stables"
+        ],
+        "summary": "Create new order.",
+        "description": "Requires authentication.",
         "parameters": [],
-        "responses": {}
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/mongoDbId"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "409": {
+            "description": "Conflict/Duplicate",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
       }
     },
     "/breeds/": {
@@ -593,7 +786,7 @@
         "properties": {
           "_id": {
             "type": "string",
-            "example": "640cac644be6e1bbfa31a31c"
+            "example": "642d2fc54ba6769cf0c8162c"
           },
           "name": {
             "type": "string",
@@ -603,14 +796,70 @@
             "type": "string",
             "example": "Chantilly, VA"
           },
+          "numberOfHorses": {
+            "type": "number",
+            "example": 38
+          },
           "owner": {
             "type": "string",
             "example": "Haley Comet"
           },
-          "numberOfHorses": {
+          "__v": {
             "type": "number",
-            "example": 38
+            "example": 0
           }
+        }
+      }
+    },
+    "createStable": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Haley's Horse Heaven"
+        },
+        "location": {
+          "type": "string",
+          "example": "Chantilly, VA"
+        },
+        "numberOfHorses": {
+          "type": "number",
+          "example": 38
+        },
+        "owner": {
+          "type": "string",
+          "example": "Haley Comet"
+        }
+      }
+    },
+    "mongoDbId": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "<mongo_db_id>"
+        }
+      }
+    },
+    "successDelete": {
+      "type": "object",
+      "properties": {
+        "acknowledged": {
+          "type": "boolean",
+          "example": true
+        },
+        "deletedCount": {
+          "type": "number",
+          "example": 1
+        }
+      }
+    },
+    "error": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string",
+          "example": "Error message"
         }
       }
     }
