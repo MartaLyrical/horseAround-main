@@ -1,5 +1,6 @@
 const express = require('express');
 const { auth, requiresAuth } = require('express-openid-connect');
+const { tryCatch } = require("../utils/tryCatch")
 
 const router = express.Router()
 // router.use("/", require("./swagger"));
@@ -17,7 +18,7 @@ const config = {
 router.use(auth(config));
 
 // for testing only
-router.get('/',
+router.get('/', tryCatch(
     // #swagger.tags = ['home']
     // #swagger.summary = 'Homepage.'
     /* #swagger.responses[200] = { 
@@ -32,14 +33,17 @@ router.get('/',
             state: req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out'
         };
         res.json(response);
-    });
+    }));
 
-router.get('/profile', requiresAuth(), (req, res) => {
+router.get('/profile', requiresAuth(), tryCatch((req, res) => {
     // #swagger.tags = ['home']
     // #swagger.summary = 'profile.'
     /* #swagger.responses[200] = { 
               description: 'Success'
          } */
+    /* #swagger.responses[401] = { 
+             description: 'Unauthorized',
+        } */
     /* #swagger.responses[500] = { 
               description: 'Internal Server Error',
               schema: { $ref: "#/definitions/error" }
@@ -48,7 +52,7 @@ router.get('/profile', requiresAuth(), (req, res) => {
         message: `Welcome ${req.oidc.user.name}!`
     };
     res.json(response);
-})
+}))
 
 // routes goes here
 router.use('/stables', require('./stables'))

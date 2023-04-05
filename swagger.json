@@ -54,6 +54,9 @@
           "200": {
             "description": "Success"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error",
             "schema": {
@@ -111,10 +114,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/error"
-            }
+            "description": "Unauthorized"
           },
           "409": {
             "description": "Conflict/Duplicate",
@@ -213,10 +213,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/error"
-            }
+            "description": "Unauthorized"
           },
           "404": {
             "description": "Not found",
@@ -260,10 +257,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/error"
-            }
+            "description": "Unauthorized"
           },
           "404": {
             "description": "Not found",
@@ -306,10 +300,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/error"
-            }
+            "description": "Unauthorized"
           },
           "409": {
             "description": "Conflict/Duplicate",
