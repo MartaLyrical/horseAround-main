@@ -54,6 +54,8 @@ mongoClient.initDb((err) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`App running on port ${port}`);
-});
+const server = app.listen(port, () => {
+  console.log(`App running on port ${port}`)
+})
+
+module.exports = { app, server }
