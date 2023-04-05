@@ -31,7 +31,7 @@
     "mongodb": "^5.1.0",
     "mongodb-client": "^0.0.0",
     "mongoose": "^7.0.3",
-    "swagger": "^0.0.1",
+    "swagger": "^0.7.5",
     "swagger-ui-express": "^4.6.2",
     "validatorjs": "^3.22.1"
   }
