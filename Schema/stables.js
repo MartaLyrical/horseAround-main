@@ -9,12 +9,12 @@ const stablesSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  owner: {
-    type: String,
-    required: true,
-  },
   numberOfHorses: {
     type: Number,
+    required: true,
+  },
+  owner: {
+    type: String,
     required: true,
   },
 })
