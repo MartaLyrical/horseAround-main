@@ -69,6 +69,12 @@ stablesRouter.post('/',
         // #swagger.tags = ['Stables']
         // #swagger.summary = 'Create new stable.'
         // #swagger.description = 'Requires authentication.'
+        /* #swagger.parameters['obj'] = {
+            in: 'body',
+            description: 'Stables data.  Change values to work.',
+            required: true,
+            schema: { $ref: "#/definitions/createStable" }
+        } */
         /* #swagger.responses[201] = { 
                   description: 'Created',
                   schema: { $ref: "#/definitions/mongoDbId" }
@@ -156,6 +162,12 @@ stablesRouter.post('/order',
         // #swagger.tags = ['Stables']
         // #swagger.summary = 'Create new order.'
         // #swagger.description = 'Requires authentication.'
+        /* #swagger.parameters['obj'] = {
+            in: 'body',
+            description: 'order information. Change values to work.',
+            required: true,
+            schema: { $ref: "#/definitions/placeOrder" }
+        } */
         /* #swagger.responses[201] = { 
                   description: 'Created',
                   schema: { $ref: "#/definitions/mongoDbId" }

@@ -34,6 +34,10 @@ const doc = {
     mongoDbId: {
       _id: "<mongo_db_id>"
     },
+    placeOrder: {
+      horseId: "640cac644be6e1bbfa31a3sx",
+      stablesId: "640cac644be6e1bbfa31a3sx"
+    },
     successDelete: {
       "acknowledged": true,
       "deletedCount": 1

@@ -5,7 +5,7 @@
     "description": "Horses API",
     "version": "1.0.0"
   },
-  "host": "localhost:8080",
+  "host": "cse-341-adolin.onrender.com",
   "basePath": "/",
   "tags": [
     {
@@ -18,7 +18,7 @@
     }
   ],
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/": {
@@ -92,7 +92,17 @@
         ],
         "summary": "Create new stable.",
         "description": "Requires authentication.",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Stables data. Change values to work.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/createStable"
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created",
@@ -277,7 +287,17 @@
         ],
         "summary": "Create new order.",
         "description": "Requires authentication.",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "order information. Change values to work.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/placeOrder"
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created",
@@ -838,6 +858,19 @@
         "_id": {
           "type": "string",
           "example": "<mongo_db_id>"
+        }
+      }
+    },
+    "placeOrder": {
+      "type": "object",
+      "properties": {
+        "horseId": {
+          "type": "string",
+          "example": "640cac644be6e1bbfa31a3sx"
+        },
+        "stablesId": {
+          "type": "string",
+          "example": "640cac644be6e1bbfa31a3sx"
         }
       }
     },
