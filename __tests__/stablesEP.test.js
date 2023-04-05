@@ -30,23 +30,23 @@ const mockOrder = {
 
 let createdMockStableId
 
-describe.only('GET endpoints', () => {
+describe('Stables endpoints', () => {
     beforeEach(() => jest.clearAllMocks());
     afterAll(() => server.close());
 
-    it('should get all stables', async () => {
+    test('get /stables should get all stables', async () => {
         const res = await request.get('/stables')
         expect(res.statusCode).toEqual(200)
         expect(res.body.length).toBeGreaterThan(0)
     })
-    it('should create a new stable', async () => {
+    test('post /stables/_id should create a new stable', async () => {
         const res = await request.post('/stables')
             .send(mockStable)
         expect(res.statusCode).toEqual(201)
         expect(res.body).toBeDefined()
         createdMockStableId = res.body['Created Stable _Id']
     })
-    it('should get a specific stable', async () => {
+    test('get /stables/_id should get a specific stable', async () => {
         const res = await request.get(`/stables/${createdMockStableId}`);
         expect(res.statusCode).toEqual(200)
         expect(res.body.name).toEqual(mockStable.name)
@@ -54,7 +54,7 @@ describe.only('GET endpoints', () => {
         expect(res.body.owner).toEqual(mockStable.owner);
         expect(res.body.numberOfHorses).toEqual(mockStable.numberOfHorses);
     })
-    it('should update a stable', async () => {
+    test('put /stables/_id should update a stable', async () => {
         const res = await request
             .put(`/stables/${createdMockStableId}`)
             .send({
@@ -71,18 +71,18 @@ describe.only('GET endpoints', () => {
         expect(res.body.numberOfHorses).toEqual(15)
     })
 
-    it('should delete a stable', async () => {
+    test('delete /stables/_id should delete a stable', async () => {
         const res = await request.delete(`/stables/${createdMockStableId}`)
         expect(res.statusCode).toEqual(200)
         expect(res.body.deletedCount).toEqual(1)
     })
-    it('should return the sum of numberOfHorses of all stables', async () => {
+    test('get /stables/inventory should return the sum of numberOfHorses of all stables', async () => {
         const res = await request.get(`/stables/inventory`)
         expect(res.statusCode).toEqual(200)
         const numberOfHorses = parseInt(res.body.numberOfHorses)
         expect(typeof numberOfHorses).toBe('number')
     })
-    it('should create a new order', async () => {
+    test('post /stables/order should create a new order', async () => {
         const res = await request.post(`/stables/order`).send(mockOrder);
         expect(res.statusCode).toEqual(201);
         // makes sure to delete the created order

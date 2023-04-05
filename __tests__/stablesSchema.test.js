@@ -92,6 +92,23 @@ describe("Stables Schema/Model", () => {
         });
         await expect(incompleteStables.save()).rejects.toThrow();
     });
+    test("should not save stables instance with invalid numberOfHorses input", async () => {
+        expect.assertions(3);
+
+        const invalidStables = new Stables({
+            name: "Valid name",
+            location: "Valid location",
+            numberOfHorses: "Invalid numberOfHorses",
+            owner: "Valid owner"
+        });
+        try {
+            await invalidStables.save();
+        } catch (error) {
+            expect(error).toBeInstanceOf(mongoose.Error.ValidationError);
+            expect(error.errors.numberOfHorses).toBeDefined();
+            expect(error.errors.numberOfHorses.kind).toBe("Number");
+        }
+    });
     test("should update an existing stables instance", async () => {
         // save a new stables instance
         const savedStables = await stables.save();
