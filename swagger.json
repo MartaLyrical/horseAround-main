@@ -97,7 +97,7 @@
         "description": "Requires authentication.",
         "parameters": [
           {
-            "name": "obj",
+            "name": "Object",
             "in": "body",
             "description": "Stables data. Change values to work.",
             "required": true,
@@ -203,13 +203,22 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "Object",
+            "in": "body",
+            "description": "Stables data to be updated. Change values to work.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/createStable"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/mongoDbId"
+              "$ref": "#/definitions/createStable"
             }
           },
           "401": {
@@ -283,7 +292,7 @@
         "description": "Requires authentication.",
         "parameters": [
           {
-            "name": "obj",
+            "name": "Object",
             "in": "body",
             "description": "order information. Change values to work.",
             "required": true,

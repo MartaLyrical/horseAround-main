@@ -69,7 +69,7 @@ stablesRouter.post('/',
           // #swagger.tags = ['Stables']
           // #swagger.summary = 'Create new stable.'
           // #swagger.description = 'Requires authentication.'
-          /* #swagger.parameters['obj'] = {
+          /* #swagger.parameters['Object'] = {
               in: 'body',
               description: 'Stables data.  Change values to work.',
               required: true,
@@ -101,9 +101,15 @@ stablesRouter.put('/:id',
           // #swagger.tags = ['Stables']
           // #swagger.summary = 'Update a stable.'
           // #swagger.description = 'Requires authentication and valid mongodbId.'
+          /* #swagger.parameters['Object'] = {
+              in: 'body',
+              description: 'Stables data to be updated. Change values to work.',
+              required: true,
+              schema: { $ref: "#/definitions/createStable" }
+          } */
           /* #swagger.responses[200] = { 
                     description: 'Success',
-                    schema: { $ref: "#/definitions/mongoDbId" }
+                    schema: { $ref: "#/definitions/createStable" }
                } */
           /* #swagger.responses[401] = { 
                     description: 'Unauthorized',
@@ -159,7 +165,7 @@ stablesRouter.post('/order',
           // #swagger.tags = ['Stables']
           // #swagger.summary = 'Create new order.'
           // #swagger.description = 'Requires authentication.'
-          /* #swagger.parameters['obj'] = {
+          /* #swagger.parameters['Object'] = {
               in: 'body',
               description: 'order information. Change values to work.',
               required: true,
