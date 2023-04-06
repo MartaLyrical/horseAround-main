@@ -1,4 +1,5 @@
 const mongodb = require("../db/mongoClientDb");
+const ObjectId = require('mongodb').ObjectId;
 
 const getAll = async (req, res) => {
   const result = await mongodb.getDb().db().collection("owners").find();
@@ -46,9 +47,7 @@ const createOwner = async (req, res) => {
 };
 
 const updateOwner = async (req, res) => {
-  if (!ObjectId.isValid(req.params.id)) {
-    res.status(400).json("Must use a owner id to update a owner.");
-  }
+  try {
   const ownerId = new ObjectId(req.params.id);
   const owner = {
     firstName: req.body.firstName,
@@ -60,7 +59,7 @@ const updateOwner = async (req, res) => {
   };
   const response = await mongodb
     .getDb()
-    .db()
+    .db("horse_breeds")
     .collection("owners")
     .replaceOne({ _id: ownerId }, owner);
   console.log(response);
@@ -70,6 +69,9 @@ const updateOwner = async (req, res) => {
     res
       .status(500)
       .json(response.error || "Error, the owner was not updated!!!");
+  }
+  } catch (err) {
+    res.status(500).json(err);
   }
 };
 
